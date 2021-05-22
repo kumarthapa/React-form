@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 //import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import './UserForm.css'
 const UserForm = () => {
     const [InputValue, setInputvaue] = useState({
@@ -8,6 +9,7 @@ const UserForm = () => {
         phone:'',
         city:''
     })
+    const history=useHistory();
     const onChangeHandler=name=>event=>{
         setInputvaue({
             ...InputValue,
@@ -21,8 +23,7 @@ const UserForm = () => {
     if(InputValue.name==''||InputValue.email==''||InputValue.phone==''||InputValue.city==''){
       alert('Please fill all the fields')
     }else{
-        // this.props.history.push("/userdata")
-        window.location.href = "/userdata";
+        history.push("/userdata")
     }
     }
     return (
