@@ -1,32 +1,47 @@
 import React,{useState,useEffect} from 'react'
+//import {Link} from 'react-router-dom'
 import './UserForm.css'
 const UserForm = () => {
     const [InputValue, setInputvaue] = useState({
-        name:'kumar',
-        email:'kum123@.com',
-        phone:'12345678',
-        city:'Roing'
+        name:'',
+        email:'',
+        phone:'',
+        city:''
     })
-    const onChangeHandler = (e) =>{
-        setInputvaue({[e.target.name]:e.target.value})
+    const onChangeHandler=name=>event=>{
+        setInputvaue({
+            ...InputValue,
+            [name]:event.target.value
+        })
+    }
+    const submitHandler=(event)=>{
+    event.preventDefault();
+    localStorage.setItem("values",JSON.stringify(InputValue))
+
+    if(InputValue.name==''||InputValue.email==''||InputValue.phone==''||InputValue.city==''){
+      alert('Please fill all the fields')
+    }else{
+        // this.props.history.push("/userdata")
+        window.location.href = "/userdata";
+    }
     }
     return (
        <>
-       <div >
-           <form>
+       <div>
+           <form onSubmit={submitHandler}>
            <div className="contactform">
            <h1>React Form 2021</h1>
                <label>
-               <input type="text" name="name" onChange={onChangeHandler} Name="InputField" value={InputValue.name} placeholder="name..." />
+               <input type="text" name="name" onChange={onChangeHandler('name')} value={InputValue.name} placeholder="name..." />
                </label>
                <label>
-               <input type="email" name="email" onChange={onChangeHandler} value={InputValue.email} placeholder="email..."/>
+               <input type="text" name="email" onChange={onChangeHandler('email')} value={InputValue.email} placeholder="email..."/>
                </label>
                <label>
-               <input type="text" name="phone" onChange={onChangeHandler} value={InputValue.phone} placeholder="phone..."/>
+               <input type="text" name="phone" onChange={onChangeHandler('phone')} value={InputValue.phone} placeholder="phone..."/>
                </label>
                <label>
-               <input type="text" name="city" onChange={onChangeHandler} value={InputValue.city} placeholder="city..."/>
+               <input type="text" name="city" onChange={onChangeHandler('city')} value={InputValue.city} placeholder="city..."/>
                </label>
                <label> 
                <button type="submit" className="sumbmitBtn" name="name">SEND ME</button>
