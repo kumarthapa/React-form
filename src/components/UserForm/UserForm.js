@@ -18,12 +18,17 @@ const UserForm = () => {
     }
     const submitHandler=(event)=>{
     event.preventDefault();
-    localStorage.setItem("values",JSON.stringify(InputValue))
+    // localStorage.setItem("values",JSON.stringify(InputValue))
 
     if(InputValue.name==''||InputValue.email==''||InputValue.phone==''||InputValue.city==''){
       alert('Please fill all the fields')
     }else{
-        history.push("/userdata")
+        history.push({
+            pathname:'/userdata',
+            state:{
+                inputValue:InputValue
+            }
+        })
     }
     }
     return (
